@@ -10,6 +10,11 @@
     "@jridgewell/gen-mapping" "^0.3.5"
     "@jridgewell/trace-mapping" "^0.3.24"
 
+"@catppuccin/tailwindcss@^1.0.0-beta.1":
+  version "1.0.0-beta.1"
+  resolved "https://registry.npmjs.org/@catppuccin/tailwindcss/-/tailwindcss-1.0.0-beta.1.tgz"
+  integrity sha512-+mnOXw8JAT0Kz+KDi0dMM16YJMTC+N0yTzOU5n3b3ibUQFv4DQTVPYAx+P7iKfSwG+5w4gZ4+kupQQHKkcXnFg==
+
 "@esbuild/darwin-arm64@0.25.4":
   version "0.25.4"
   resolved "https://registry.npmjs.org/@esbuild/darwin-arm64/-/darwin-arm64-0.25.4.tgz"

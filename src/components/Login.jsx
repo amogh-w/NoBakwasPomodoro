@@ -2,8 +2,6 @@ import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../firebase';
 
 const Login = () => {
-  console.log("login")
-
   const handleLogin = async () => {
     try {
       await signInWithPopup(auth, provider);
@@ -13,13 +11,28 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
-      <h2 className="text-3xl font-semibold mb-4 text-gray-700">
-        Welcome to NoBakwas Pomodoro
+    <div className="flex flex-col items-center justify-center min-h-screen p-8">
+      <h2 className="text-4xl font-bold mb-8 text-ctp-text">
+        Welcome to No Bakwas Pomodoro
       </h2>
       <button
         onClick={handleLogin}
-        className="bg-blue-600 text-white px-6 py-2 rounded shadow hover:bg-blue-700"
+        className="
+          bg-ctp-pink 
+          text-ctp-crust 
+          px-8 py-3 
+          rounded-lg 
+          shadow-lg 
+          hover:shadow-2xl 
+          hover:scale-105 
+          transition 
+          duration-300 
+          ease-in-out 
+          focus:outline-none 
+          focus:ring-4 
+          focus:ring-ctp-mauve/70
+          active:scale-95
+        "
       >
         Sign in with Google
       </button>

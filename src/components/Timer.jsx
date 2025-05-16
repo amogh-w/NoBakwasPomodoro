@@ -70,20 +70,22 @@ const Timer = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded shadow-md">
+    <div className="bg-ctp-surface0 p-6 rounded-xl shadow-md max-w-md mx-auto">
       <input
         value={activity}
         onChange={e => setActivity(e.target.value)}
-        className="border p-2 rounded w-full mb-4"
+        className="border border-ctp-overlay2 bg-ctp-base text-ctp-text p-2 rounded w-full mb-6 placeholder-ctp-subtext0 disabled:opacity-60"
         placeholder="What are you working on?"
         disabled={isRunning}
       />
-      <h2 className="text-4xl font-mono text-center mb-4">{formatTime()}</h2>
+      <h2 className="text-6xl font-mono text-center mb-6 text-ctp-text select-none">
+        {formatTime()}
+      </h2>
       <div className="flex justify-center space-x-4">
         {!isRunning ? (
           <button
             onClick={handleStart}
-            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+            className="bg-ctp-green text-ctp-crust font-semibold px-6 py-2 rounded-lg shadow-md hover:bg-ctp-green/90 transition"
           >
             Start
           </button>
@@ -91,13 +93,13 @@ const Timer = () => {
           <>
             <button
               onClick={handleEndSession}
-              className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
+              className="bg-ctp-yellow text-ctp-crust font-semibold px-6 py-2 rounded-lg shadow-md hover:bg-ctp-yellow/90 transition"
             >
               End Session
             </button>
             <button
               onClick={handleReset}
-              className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
+              className="bg-ctp-overlay2 text-ctp-text font-semibold px-6 py-2 rounded-lg shadow-md hover:bg-ctp-overlay1 transition"
             >
               Reset
             </button>

@@ -20,19 +20,28 @@ const SessionHistory = () => {
   }, []);
 
   return (
-    <div className="bg-white p-6 rounded shadow-md">
-      <h3 className="text-xl font-semibold mb-4">Previous Sessions</h3>
-      <ul className="space-y-2">
-        {sessions.map(session => (
-          <li key={session.id} className="border p-3 rounded">
-            <p className="font-semibold">{session.activity}</p>
-            <p className="text-sm text-gray-500">
-              Start: {new Date(session.start).toLocaleString()}<br />
-              End: {new Date(session.end).toLocaleString()}<br />
-              Duration: {Math.floor(session.duration / 60)} min {session.duration % 60} sec
-            </p>
-          </li>
-        ))}
+    <div className="bg-ctp-surface0 p-6 rounded-xl shadow-md max-w-xl mx-auto">
+      <h3 className="text-2xl font-semibold mb-6 text-ctp-text border-b border-ctp-overlay2 pb-2">
+        Previous Sessions
+      </h3>
+      <ul className="space-y-4">
+        {sessions.length === 0 ? (
+          <li className="text-ctp-subtext0 italic">No sessions found.</li>
+        ) : (
+          sessions.map(session => (
+            <li
+              key={session.id}
+              className="border border-ctp-overlay2 p-4 rounded-lg bg-ctp-base shadow-inner"
+            >
+              <p className="font-semibold text-ctp-peach mb-1">{session.activity}</p>
+              <p className="text-sm text-ctp-subtext1 leading-relaxed whitespace-pre-line">
+                Start: {new Date(session.start).toLocaleString()}{"\n"}
+                End: {new Date(session.end).toLocaleString()}{"\n"}
+                Duration: {Math.floor(session.duration / 60)} min {session.duration % 60} sec
+              </p>
+            </li>
+          ))
+        )}
       </ul>
     </div>
   );
