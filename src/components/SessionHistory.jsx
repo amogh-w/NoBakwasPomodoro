@@ -5,6 +5,7 @@ import Calendar from 'react-calendar';
 // import 'react-calendar/dist/Calendar.css';
 import '../styles/mocha-calendar.css';
 import { format } from 'date-fns';
+import SessionListByDate from './SessionListByDate';
 
 const SessionHistory = () => {
   const [sessions, setSessions] = useState([]);
@@ -28,12 +29,13 @@ const SessionHistory = () => {
         return acc;
       }, {});
       setGroupedSessions(grouped);
+      setSelectedDate(format(new Date(), 'yyyy-MM-dd'));
     };
     fetchSessions();
   }, []);
 
   return (
-    <div className="bg-ctp-surface0 p-6 rounded-xl shadow-md max-w-xl mx-auto">
+    <div className="bg-ctp-surface0 p-6 rounded-xl shadow-md mx-auto">
       <h3 className="text-2xl font-semibold mb-6 text-ctp-text border-b border-ctp-overlay2 pb-2">
         Previous Sessions
       </h3>
@@ -41,9 +43,7 @@ const SessionHistory = () => {
       <Calendar
         onClickDay={(value) => {
           const dateKey = format(value, 'yyyy-MM-dd');
-          if (groupedSessions[dateKey]) {
-            setSelectedDate(dateKey);
-          }
+          setSelectedDate(dateKey);
         }}
         tileContent={({ date }) => {
           const key = format(date, 'yyyy-MM-dd');
@@ -59,30 +59,8 @@ const SessionHistory = () => {
       />
 
       {selectedDate && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-ctp-base p-6 rounded-xl shadow-lg max-w-md w-full relative">
-            <button
-              onClick={() => setSelectedDate(null)}
-              className="absolute top-2 right-2 text-ctp-subtext1"
-            >
-              ✕
-            </button>
-            <h4 className="text-xl font-bold mb-4 text-ctp-lavender">
-              Sessions on {selectedDate}
-            </h4>
-            <ul className="space-y-3 max-h-60 overflow-y-auto">
-              {groupedSessions[selectedDate].map((session) => (
-                <li key={session.id} className="border border-ctp-overlay2 p-3 rounded-lg bg-ctp-surface0">
-                  <p className="font-semibold text-ctp-peach">{session.activity}</p>
-                  <p className="text-sm text-ctp-subtext1 leading-relaxed whitespace-pre-line">
-                    Start: {new Date(session.start).toLocaleTimeString()}{"\n"}
-                    End: {new Date(session.end).toLocaleTimeString()}{"\n"}
-                    Duration: {Math.floor(session.duration / 60)} min {session.duration % 60} sec
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="mt-6">
+          <SessionListByDate date={selectedDate} sessions={groupedSessions[selectedDate] || []} />
         </div>
       )}
     </div>

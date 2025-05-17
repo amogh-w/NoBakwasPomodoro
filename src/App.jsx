@@ -46,7 +46,7 @@ const App = () => {
     return <Login />;
 
   return (
-    <div className="max-w-3xl mx-auto p-6 text-ctp-text min-h-screen">
+    <div className="max-w-6xl mx-auto px-8 py-6 text-ctp-text min-h-screen">
       <header className="flex justify-between items-center mb-8 border-b border-ctp-overlay2 pb-4">
         <h1 className="text-3xl font-bold text-ctp-pink">No Bakwas Pomodoro</h1>
         <div className="flex items-center">
@@ -59,9 +59,13 @@ const App = () => {
           <ThemeToggler />
         </div>
       </header>
-      <main className="space-y-10">
-        <Timer />
-        <SessionHistory />
+      <main className="flex flex-col md:flex-row gap-6">
+        <div className="w-full md:w-1/3">
+          <Timer />
+        </div>
+        <div className="w-full md:w-2/3">
+          <SessionHistory />
+        </div>
       </main>
     </div>
   );
