@@ -253,12 +253,12 @@ const Timer = () => {
         </div>
       </div>
 
-      <div className="flex justify-center space-x-4 mb-6">
+      <div className="flex flex-wrap justify-center gap-4 mb-6">
         {!isRunning ? (
           <button
             onClick={handleStart}
             disabled={!activity.trim()}
-            className={`font-semibold px-6 py-2 rounded-lg shadow-md transition ${
+            className={`min-w-[100px] font-semibold px-6 py-2 rounded-lg shadow-md transition ${
               activity.trim()
                 ? 'bg-ctp-green text-ctp-crust hover:bg-ctp-green/90'
                 : 'bg-ctp-overlay2 text-ctp-subtext0 cursor-not-allowed'
@@ -270,7 +270,7 @@ const Timer = () => {
           <>
             <button
               onClick={() => setIsPaused((p) => !p)}
-              className={`font-semibold px-6 py-2 rounded-lg shadow-md transition ${
+              className={`min-w-[100px] font-semibold px-6 py-2 rounded-lg shadow-md transition ${
                 isPaused
                   ? 'bg-ctp-green text-ctp-crust hover:bg-ctp-green/90'
                   : 'bg-ctp-yellow text-ctp-crust hover:bg-ctp-yellow/90'
@@ -280,19 +280,19 @@ const Timer = () => {
             </button>
             <button
               onClick={handleEndSession}
-              className="bg-ctp-red text-ctp-crust font-semibold px-6 py-2 rounded-lg shadow-md hover:bg-ctp-maroon transition"
+              className="min-w-[100px] bg-ctp-red text-ctp-crust font-semibold px-6 py-2 rounded-lg shadow-md hover:bg-ctp-maroon transition"
             >
               End Session
             </button>
             <button
               onClick={handleReset}
-              className="bg-ctp-overlay2 text-ctp-text font-semibold px-6 py-2 rounded-lg shadow-md hover:bg-ctp-overlay1 transition"
+              className="min-w-[100px] bg-ctp-overlay2 text-ctp-text font-semibold px-6 py-2 rounded-lg shadow-md hover:bg-ctp-overlay1 transition"
             >
               Reset
             </button>
             <button
               onClick={handleSessionComplete}
-              className="bg-ctp-blue text-ctp-crust font-semibold px-6 py-2 rounded-lg shadow-md hover:bg-ctp-sapphire transition"
+              className="min-w-[100px] bg-ctp-blue text-ctp-crust font-semibold px-6 py-2 rounded-lg shadow-md hover:bg-ctp-sapphire transition"
             >
               Skip
             </button>
