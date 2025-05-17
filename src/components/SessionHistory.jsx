@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { db, auth } from '../firebase';
 import { collection, query, where, orderBy, getDocs } from 'firebase/firestore';
 import Calendar from 'react-calendar';
-// import 'react-calendar/dist/Calendar.css';
 import '../styles/mocha-calendar.css';
 import { format } from 'date-fns';
 import SessionListByDate from './SessionListByDate';
@@ -12,25 +11,26 @@ const SessionHistory = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [groupedSessions, setGroupedSessions] = useState({});
 
+  const fetchSessions = async () => {
+    const q = query(
+      collection(db, 'sessions'),
+      where('uid', '==', auth.currentUser.uid),
+      orderBy('start', 'desc')
+    );
+    const querySnapshot = await getDocs(q);
+    const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    setSessions(data);
+    const grouped = data.reduce((acc, session) => {
+      const date = format(new Date(session.start), 'yyyy-MM-dd');
+      if (!acc[date]) acc[date] = [];
+      acc[date].push(session);
+      return acc;
+    }, {});
+    setGroupedSessions(grouped);
+    setSelectedDate(format(new Date(), 'yyyy-MM-dd'));
+  };
+
   useEffect(() => {
-    const fetchSessions = async () => {
-      const q = query(
-        collection(db, 'sessions'),
-        where('uid', '==', auth.currentUser.uid),
-        orderBy('start', 'desc')
-      );
-      const querySnapshot = await getDocs(q);
-      const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setSessions(data);
-      const grouped = data.reduce((acc, session) => {
-        const date = format(new Date(session.start), 'yyyy-MM-dd');
-        if (!acc[date]) acc[date] = [];
-        acc[date].push(session);
-        return acc;
-      }, {});
-      setGroupedSessions(grouped);
-      setSelectedDate(format(new Date(), 'yyyy-MM-dd'));
-    };
     fetchSessions();
   }, []);
 
@@ -60,7 +60,11 @@ const SessionHistory = () => {
 
       {selectedDate && (
         <div className="mt-6">
-          <SessionListByDate date={selectedDate} sessions={groupedSessions[selectedDate] || []} />
+          <SessionListByDate
+            date={selectedDate}
+            sessions={groupedSessions[selectedDate] || []}
+            refreshSessions={fetchSessions}
+          />
         </div>
       )}
     </div>
