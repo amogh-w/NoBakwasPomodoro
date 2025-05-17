@@ -146,15 +146,23 @@ const Timer = () => {
       setCompletedWorkSessions(newCompleted);
       // Decide next session: long break or short break
       if (newCompleted % LONG_BREAK_INTERVAL === 0) {
-        resetTimerByType('longBreak');
+        setSessionType('longBreak');
+        setSecondsLeft(customDurations.longBreak);
+        setIsRunning(true);
+        setStartTime(new Date());
       } else {
-        resetTimerByType('shortBreak');
+        setSessionType('shortBreak');
+        setSecondsLeft(customDurations.shortBreak);
+        setIsRunning(true);
+        setStartTime(new Date());
       }
     } else {
-      resetTimerByType('work');
+      setSessionType('work');
+      setSecondsLeft(customDurations.work);
+      setIsRunning(true);
+      setStartTime(new Date());
     }
-    setStartTime(null);
-    setActivity('');
+    // setActivity(''); // Do not clear activity here to preserve task name
   };
 
   // Called when user manually ends session
@@ -218,13 +226,13 @@ const Timer = () => {
           : 'Long Break'}
       </h3>
 
-      <div className="relative w-40 h-40 mx-auto mb-6">
+      <div className="relative w-60 h-60 mx-auto mb-6">
         <svg className="transform -rotate-90" viewBox="0 0 100 100">
           <circle
             cx="50"
             cy="50"
             r="45"
-            stroke="#ccc"
+            stroke="#181825"
             strokeWidth="10"
             fill="none"
           />
@@ -240,7 +248,7 @@ const Timer = () => {
             style={{ transition: 'stroke-dashoffset 1s linear' }}
           />
         </svg>
-        <div className="absolute inset-0 flex items-center justify-center text-6xl font-mono text-ctp-text select-none">
+        <div className="absolute inset-0 flex items-center justify-center text-5xl font-mono text-ctp-text select-none">
           {formatTime()}
         </div>
       </div>
@@ -281,6 +289,12 @@ const Timer = () => {
               className="bg-ctp-overlay2 text-ctp-text font-semibold px-6 py-2 rounded-lg shadow-md hover:bg-ctp-overlay1 transition"
             >
               Reset
+            </button>
+            <button
+              onClick={handleSessionComplete}
+              className="bg-ctp-blue text-ctp-crust font-semibold px-6 py-2 rounded-lg shadow-md hover:bg-ctp-sapphire transition"
+            >
+              Skip
             </button>
           </>
         )}
