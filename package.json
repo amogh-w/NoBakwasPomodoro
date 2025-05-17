@@ -12,8 +12,10 @@
   "dependencies": {
     "@catppuccin/tailwindcss": "^1.0.0-beta.1",
     "@tailwindcss/vite": "^4.1.7",
+    "date-fns": "^4.1.0",
     "firebase": "^11.7.3",
     "react": "^19.1.0",
+    "react-calendar": "^5.1.0",
     "react-dom": "^19.1.0",
     "react-firebase-hooks": "^5.1.1",
     "tailwindcss": "^4.1.7"
